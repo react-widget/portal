@@ -21,6 +21,11 @@
     "bugs": {
         "url": "https://github.com/react-widget/portal/issues"
     },
+    "files": [
+        "*.js",
+        "lib",
+        "*.md"
+    ],
     "homepage": "https://github.com/react-widget/portal#readme",
     "devDependencies": {
         "@babel/plugin-transform-modules-amd": "^7.2.0",
