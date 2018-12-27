@@ -1,0 +1,39 @@
+{
+    "name": "react-widget-portal",
+    "version": "1.0.0",
+    "description": "react-widget-portal",
+    "main": "index.js",
+    "scripts": {
+        "start": "transform-es src -d lib -c -w",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/react-widget/portal.git"
+    },
+    "keywords": [
+        "react",
+        "portal",
+        "react-widget-portal"
+    ],
+    "author": "nobo.zhou@foxmail.com",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/react-widget/portal/issues"
+    },
+    "homepage": "https://github.com/react-widget/portal#readme",
+    "devDependencies": {
+        "@babel/plugin-transform-modules-amd": "^7.2.0",
+        "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+        "@babel/plugin-transform-modules-systemjs": "^7.2.0",
+        "@babel/plugin-transform-modules-umd": "^7.2.0",
+        "transform-es": "^2.2.10"
+    },
+    "dependencies": {
+        "@babel/runtime": "^7.2.0",
+        "@babel/runtime-corejs2": "^7.2.0",
+        "prop-types": "^15.6.2",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0"
+    }
+}
