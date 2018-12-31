@@ -6,11 +6,13 @@ export default class Portal extends React.Component {
     static propTypes = {
         children: PropTypes.node.isRequired,
         getContainer: PropTypes.func,
+        didUpdate: PropTypes.func,
     };
 
     static defaultProps = {
         container: document.body,
-        getContainer: () => document.body
+        getContainer: () => document.body,
+        didUpdate: () => { }
     };
 
     static getDerivedStateFromProps(props, state) {
@@ -24,9 +26,15 @@ export default class Portal extends React.Component {
         container: null
     }
 
+    componentDidUpdate() {
+        this.props.didUpdate();
+    }
+
     componentDidMount() {
         this.setState({
             container: this.props.getContainer()
+        }, () => {
+            this.props.didUpdate();
         });
     }
 
