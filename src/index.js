@@ -10,13 +10,11 @@ export default class Portal extends React.Component {
     };
 
     static defaultProps = {
-        container: document.body,
         getContainer: () => document.body,
         didUpdate: () => { }
     };
 
     static getDerivedStateFromProps(props, state) {
-
         return {
             container: props.getContainer()
         }
@@ -31,11 +29,7 @@ export default class Portal extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            container: this.props.getContainer()
-        }, () => {
-            this.props.didUpdate();
-        });
+        this.componentDidUpdate();
     }
 
     render() {
