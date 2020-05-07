@@ -1,44 +1,64 @@
 {
-    "name": "react-widget-portal",
-    "version": "1.0.3",
-    "description": "react-widget-portal",
-    "main": "index.js",
-    "scripts": {
-        "start": "transform-es src -d lib -c -w",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/react-widget/portal.git"
-    },
-    "keywords": [
-        "react",
-        "portal",
-        "react-widget-portal"
-    ],
-    "author": "nobo.zhou@foxmail.com",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/react-widget/portal/issues"
-    },
-    "files": [
-        "*.js",
-        "lib",
-        "*.md"
-    ],
-    "homepage": "https://github.com/react-widget/portal#readme",
-    "devDependencies": {
-        "@babel/plugin-transform-modules-amd": "^7.2.0",
-        "@babel/plugin-transform-modules-commonjs": "^7.2.0",
-        "@babel/plugin-transform-modules-systemjs": "^7.2.0",
-        "@babel/plugin-transform-modules-umd": "^7.2.0",
-        "transform-es": "^2.2.10"
-    },
-    "dependencies": {
-        "@babel/runtime": "^7.2.0",
-        "@babel/runtime-corejs2": "^7.2.0",
-        "prop-types": "^15.6.2",
-        "react": "^16.7.0",
-        "react-dom": "^16.7.0"
-    }
+  "name": "react-widget-portal",
+  "version": "1.1.0",
+  "description": "react-widget-portal",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "start": "tsc -w",
+    "cjs": "transform-es src -d cjs -c -t cjs",
+    "esm": "transform-es src -d esm -c -t esm",
+    "tsc": "tsc",
+    "clear": "rimraf lib cjs esm",
+    "build": "run-s clear tsc cjs esm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-widget/portal.git"
+  },
+  "keywords": [
+    "react",
+    "portal",
+    "react-widget-portal"
+  ],
+  "author": "nobo.zhou@foxmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/react-widget/portal/issues"
+  },
+  "files": [
+    "cjs",
+    "esm",
+    "lib",
+    "*.md"
+  ],
+  "homepage": "https://github.com/react-widget/portal#readme",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "babel-plugin-search-and-replace": "^1.0.1",
+    "npm-run-all": "^4.1.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rimraf": "^3.0.2",
+    "transform-es": "^5.0.3",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.6"
+  },
+  "browserslist": [
+    ">=0.25%",
+    "not dead",
+    "not op_mini all",
+    "not Android 4.4.3-4.4.4",
+    "not ios_saf < 10",
+    "not Chrome < 50",
+    "firefox ESR"
+  ]
 }

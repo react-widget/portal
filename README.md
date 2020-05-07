@@ -5,10 +5,17 @@
 ```
 import Portal from 'react-widget-portal';
 
-
 <Portal container={document.body}>
-    <Tag></Tag>
+    <div>Hello Portal</div>
 </Portal>
 
 
+```
+
+## Interface
+
+```
+interface PortalProps {
+    container?: HTMLElement | Promise<HTMLElement | null> | null;
+}
 ```
