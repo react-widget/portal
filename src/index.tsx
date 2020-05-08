@@ -12,7 +12,10 @@ function isPromise(obj: any): obj is Promise<HTMLElement | null> {
 export const version = "%VERSION%";
 
 export interface PortalProps {
+	/** 渲染容器，默认为：document.body */
 	container?: HTMLElement | Promise<HTMLElement | null> | null;
+	/** 初始渲染时触发，注：如果container为null时不会触发，直到container存在 */
+	onChildrenMount?: () => void;
 }
 
 interface PortalState {
@@ -24,29 +27,68 @@ export class Portal extends React.Component<PortalProps, PortalState> {
 		container: typeof document !== "undefined" ? document.body : null,
 	};
 
-	static getDerivedStateFromProps(props: PortalProps, state: PortalState) {
+	static getDerivedStateFromProps(nextProps: PortalProps, nextState: PortalState) {
 		return {
 			container:
-				props.container && isPromise(props.container) ? state.container : props.container,
+				nextProps.container && isPromise(nextProps.container)
+					? nextState.container
+					: nextProps.container,
 		};
 	}
+
+	protected unmount: boolean = false;
+	protected mounted: boolean = false;
+	protected seqId: number = 1;
 
 	state = {
 		container: null,
 	};
 
 	componentDidUpdate() {
+		this.seqId++;
 		if (isPromise(this.props.container)) {
-			this.props.container.then(container =>
+			const currentSeqId = this.seqId;
+			this.props.container.then(newContainer => {
+				if (
+					this.unmount ||
+					this.state.container === newContainer ||
+					this.seqId !== currentSeqId
+				) {
+					return;
+				}
+
+				if (!this.mounted && newContainer && this.props.onChildrenMount) {
+					this.mounted = true;
+					this.props.onChildrenMount();
+				}
+
 				this.setState({
-					container,
-				})
-			);
+					container: newContainer,
+				});
+			});
+		} else if (this.props.container) {
+			if (!this.mounted && this.props.onChildrenMount) {
+				this.mounted = true;
+				this.props.onChildrenMount();
+			}
 		}
 	}
 
 	componentDidMount() {
+		if (
+			this.props.container &&
+			!isPromise(this.props.container) &&
+			this.props.onChildrenMount
+		) {
+			this.mounted = true;
+			this.props.onChildrenMount();
+		}
+
 		this.componentDidUpdate();
+	}
+
+	componentWillUnmount() {
+		this.unmount = true;
 	}
 
 	render() {
